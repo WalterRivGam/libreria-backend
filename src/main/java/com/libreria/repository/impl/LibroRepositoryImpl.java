@@ -13,11 +13,14 @@ import com.libreria.repository.dao.LibroDao;
 import lombok.RequiredArgsConstructor;
 
 @Repository
-@RequiredArgsConstructor
 public class LibroRepositoryImpl implements LibroRepository {
 
-    private final LibroDao libroDao;
+    private LibroDao libroDao;
     private LibroMapper libroMapper = Mappers.getMapper(LibroMapper.class);
+
+    public LibroRepositoryImpl(LibroDao libroDao) {
+        this.libroDao = libroDao;
+    }
 
     @Override
     public List<LibroDto> listarLibros() {

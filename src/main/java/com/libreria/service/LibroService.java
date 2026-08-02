@@ -2,8 +2,8 @@ package com.libreria.service;
 
 import java.util.List;
 
-import com.libreria.repository.dao.LibroDao;
+import com.libreria.dto.LibroDto;
 
 public interface LibroService {
-    List<LibroDao> listarLibros();
+    List<LibroDto> listarLibros();
 }
