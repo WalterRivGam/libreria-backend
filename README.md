@@ -9,6 +9,7 @@ API REST con operaciones básicas sobre libros de una librería.
 Realizado con Java y Spring. La base de datos en MySQL.
 
 ## Requisitos
+
 - JDK 21
 - MySQL 8.0
 
@@ -27,4 +28,7 @@ DB_PASSWORD="<PASSWORD>"
 ```
 
 - En la raiz del proyecto ejecutar:
-  `./mvnw spring-boot:run`
+  ```
+  ./mvnw clean compile
+  ./mvnw spring-boot:run
+  ```
