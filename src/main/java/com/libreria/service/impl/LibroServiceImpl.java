@@ -8,8 +8,6 @@ import com.libreria.dto.LibroDto;
 import com.libreria.repository.LibroRepository;
 import com.libreria.service.LibroService;
 
-import lombok.RequiredArgsConstructor;
-
 @Service
 public class LibroServiceImpl implements LibroService {
 
