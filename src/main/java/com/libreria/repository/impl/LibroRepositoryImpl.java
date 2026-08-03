@@ -6,11 +6,10 @@ import org.mapstruct.factory.Mappers;
 import org.springframework.stereotype.Repository;
 
 import com.libreria.dto.LibroDto;
+import com.libreria.entity.LibroEntity;
 import com.libreria.mapper.LibroMapper;
 import com.libreria.repository.LibroRepository;
 import com.libreria.repository.dao.LibroDao;
-
-import lombok.RequiredArgsConstructor;
 
 @Repository
 public class LibroRepositoryImpl implements LibroRepository {
@@ -25,6 +24,12 @@ public class LibroRepositoryImpl implements LibroRepository {
     @Override
     public List<LibroDto> listarLibros() {
         return libroMapper.convertirEntityADto(libroDao.findAll());
+    }
+
+    @Override
+    public LibroDto registrarLibro(LibroDto libroDto) {
+        LibroEntity libroEntity = libroMapper.convertirDtoAEntity(libroDto);
+        return libroMapper.convertirEntityADto(libroDao.save(libroEntity));
     }
 
 }

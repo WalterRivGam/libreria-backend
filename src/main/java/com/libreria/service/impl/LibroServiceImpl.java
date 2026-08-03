@@ -24,4 +24,9 @@ public class LibroServiceImpl implements LibroService {
         return libroRepository.listarLibros();
     }
 
+    @Override
+    public LibroDto registrarLibro(LibroDto libroDto) {
+        return libroRepository.registrarLibro(libroDto);
+    }
+
 }

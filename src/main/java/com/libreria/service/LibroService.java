@@ -6,4 +6,6 @@ import com.libreria.dto.LibroDto;
 
 public interface LibroService {
     List<LibroDto> listarLibros();
+
+    LibroDto registrarLibro(LibroDto libroDto);
 }
