@@ -24,11 +24,6 @@ public class UsuarioController {
 
     @GetMapping("/{username}")
     public ResponseEntity<UsuarioDto> obtenerUsuario(@PathVariable String username) {
-        Optional<UsuarioDto> usuarioOptional = usuarioService.obtenerUsuario(username);
-        if (usuarioOptional.isPresent()) {
-            return ResponseEntity.status(HttpStatus.OK).body(usuarioOptional.get());
-        } else {
-            return null;
-        }
+        return ResponseEntity.status(HttpStatus.OK).body(usuarioService.obtenerUsuario(username));
     }
 }

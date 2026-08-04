@@ -5,6 +5,7 @@ import java.util.Optional;
 import org.springframework.stereotype.Service;
 
 import com.libreria.dto.UsuarioDto;
+import com.libreria.exception.UsuarioNoEncontradoException;
 import com.libreria.repository.UsuarioRepository;
 import com.libreria.service.UsuarioService;
 
@@ -18,8 +19,8 @@ public class UsuarioServiceImpl implements UsuarioService {
     }
 
     @Override
-    public Optional<UsuarioDto> obtenerUsuario(String username) {
-        return usuarioRepository.obtenerUsuario(username);
+    public UsuarioDto obtenerUsuario(String username) {
+        return usuarioRepository.obtenerUsuario(username).orElseThrow(() -> new UsuarioNoEncontradoException(username));
     }
 
 }

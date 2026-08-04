@@ -5,5 +5,5 @@ import java.util.Optional;
 import com.libreria.dto.UsuarioDto;
 
 public interface UsuarioService {
-    public Optional<UsuarioDto> obtenerUsuario(String username);
+    public UsuarioDto obtenerUsuario(String username);
 }

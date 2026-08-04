@@ -13,7 +13,7 @@ public class SecurityConfig {
     SecurityFilterChain securityFilterChain(HttpSecurity http) {
         http.csrf(csrf -> csrf.disable());
 
-        http.authorizeHttpRequests(auth -> auth.anyRequest().authenticated());
+        http.authorizeHttpRequests(auth -> auth.anyRequest().permitAll());
 
         http.httpBasic(Customizer.withDefaults());
 
