@@ -3,6 +3,7 @@ package com.libreria.service.impl;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.libreria.dto.LibroDto;
 import com.libreria.repository.LibroRepository;
@@ -23,6 +24,7 @@ public class LibroServiceImpl implements LibroService {
     }
 
     @Override
+    @Transactional
     public LibroDto registrarLibro(LibroDto libroDto) {
         return libroRepository.registrarLibro(libroDto);
     }
