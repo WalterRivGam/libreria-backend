@@ -5,6 +5,6 @@ import lombok.Getter;
 
 @Getter
 @AllArgsConstructor
-public class UsuarioNoEncontradoException extends RuntimeException {
+public class UsuarioYaRegistradoException extends RuntimeException {
     private String username;
 }
