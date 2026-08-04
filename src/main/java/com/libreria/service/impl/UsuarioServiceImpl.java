@@ -1,5 +1,6 @@
 package com.libreria.service.impl;
 
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
@@ -13,9 +14,11 @@ import com.libreria.service.UsuarioService;
 public class UsuarioServiceImpl implements UsuarioService {
 
     private final UsuarioRepository usuarioRepository;
+    private final PasswordEncoder encoder;
 
-    public UsuarioServiceImpl(UsuarioRepository usuarioRepository) {
+    public UsuarioServiceImpl(UsuarioRepository usuarioRepository, PasswordEncoder encoder) {
         this.usuarioRepository = usuarioRepository;
+        this.encoder = encoder;
     }
 
     @Override
@@ -28,10 +31,13 @@ public class UsuarioServiceImpl implements UsuarioService {
         if (usuarioRepository.existeConNombreDeUsuario(usuario.getUsername())) {
             throw new UsuarioYaRegistradoException(usuario.getUsername());
         }
+
         usuario.setEnabled(true);
         if (!StringUtils.hasText(usuario.getRol())) {
             usuario.setRol("USUARIO");
         }
+        usuario.setPassword(encoder.encode(usuario.getPassword()));
+
         return usuarioRepository.registrarUsuario(usuario);
     }
 }
