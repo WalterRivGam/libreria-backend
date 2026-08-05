@@ -4,7 +4,6 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.libreria.dto.UsuarioDto;
@@ -26,7 +25,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         return User
                 .withUsername(usuarioDto.getUsername())
                 .password(usuarioDto.getPassword())
-                .authorities(usuarioDto.getRol())
+                .roles(usuarioDto.getRol())
                 .accountExpired(false)
                 .accountLocked(false)
                 .credentialsExpired(false)
