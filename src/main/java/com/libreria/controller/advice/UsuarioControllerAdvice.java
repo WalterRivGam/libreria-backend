@@ -53,7 +53,7 @@ public class UsuarioControllerAdvice {
     public ResponseEntity<ErrorDto> errorDeAutenticacion(AuthenticationException exception,
             HttpServletRequest request) {
 
-        String mensaje = "No se pudo autenticar al usuario. Nombre usuario o contraseña incorrecta.";
+        String mensaje = "No se pudo autenticar al usuario";
 
         ErrorDto error = new ErrorDto(
                 LocalDateTime.now(),
