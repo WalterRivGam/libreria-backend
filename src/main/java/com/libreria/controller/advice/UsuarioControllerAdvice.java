@@ -6,6 +6,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
+import org.springframework.security.core.AuthenticationException;
 
 import com.libreria.dto.ErrorDto;
 import com.libreria.exception.UsuarioNoEncontradoException;
@@ -46,5 +47,21 @@ public class UsuarioControllerAdvice {
                 request.getRequestURI());
 
         return ResponseEntity.status(HttpStatus.CONFLICT).body(error);
+    }
+
+    @ExceptionHandler(AuthenticationException.class)
+    public ResponseEntity<ErrorDto> errorDeAutenticacion(AuthenticationException exception,
+            HttpServletRequest request) {
+
+        String mensaje = "No se pudo autenticar al usuario. Nombre usuario o contraseña incorrecta.";
+
+        ErrorDto error = new ErrorDto(
+                LocalDateTime.now(),
+                HttpStatus.UNAUTHORIZED.value(),
+                HttpStatus.UNAUTHORIZED.getReasonPhrase(),
+                mensaje,
+                request.getRequestURI());
+
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(error);
     }
 }
