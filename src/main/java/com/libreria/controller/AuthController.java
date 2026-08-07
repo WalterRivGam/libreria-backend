@@ -1,8 +1,8 @@
 package com.libreria.controller;
 
-import com.libreria.security.JwtService;
 import com.libreria.dto.LoginRequestDto;
 import com.libreria.dto.TokenDto;
+import com.libreria.service.impl.JwtService;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

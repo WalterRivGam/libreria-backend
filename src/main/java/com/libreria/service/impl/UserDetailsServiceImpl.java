@@ -1,4 +1,4 @@
-package com.libreria.security;
+package com.libreria.service.impl;
 
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;

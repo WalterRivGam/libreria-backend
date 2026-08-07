@@ -1,4 +1,4 @@
-package com.libreria.security;
+package com.libreria.service.impl;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
@@ -12,6 +12,8 @@ import org.springframework.stereotype.Service;
 import java.security.Key;
 import java.util.Date;
 import java.util.function.Function;
+
+import java.util.Base64;
 
 @Service
 public class JwtService {
@@ -30,7 +32,7 @@ public class JwtService {
         return Jwts.builder()
                 .setSubject(userDetails.getUsername())
                 .setIssuedAt(new Date(System.currentTimeMillis()))
-                .setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 60 * 24)) // 24 horas
+                .setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 60 * 24))
                 .signWith(getSignInKey(), SignatureAlgorithm.HS256)
                 .compact();
     }
@@ -62,7 +64,7 @@ public class JwtService {
     }
 
     private Key getSignInKey() {
-        byte[] keyBytes = java.util.Base64.getDecoder().decode(this.SECRET_KEY);
+        byte[] keyBytes = Base64.getDecoder().decode(this.SECRET_KEY);
         return Keys.hmacShaKeyFor(keyBytes);
     }
 }
