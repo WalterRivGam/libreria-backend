@@ -2,6 +2,7 @@ package com.libreria.service.impl;
 
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 
 import com.libreria.dto.UsuarioDto;
@@ -27,6 +28,7 @@ public class UsuarioServiceImpl implements UsuarioService {
     }
 
     @Override
+    @Transactional
     public UsuarioDto registrarUsuario(UsuarioDto usuario) {
         if (usuarioRepository.existeConNombreDeUsuario(usuario.getUsername())) {
             throw new UsuarioYaRegistradoException(usuario.getUsername());

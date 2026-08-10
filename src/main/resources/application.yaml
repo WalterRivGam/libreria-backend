@@ -13,3 +13,6 @@ logging:
 jwt:
   secret:
     key: ${SECRET_KEY}
+  expiration: 900000
+  refresh:
+    duration: 604800000
