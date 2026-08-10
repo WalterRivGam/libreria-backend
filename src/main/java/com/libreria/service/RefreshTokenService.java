@@ -8,7 +8,7 @@ public interface RefreshTokenService {
 
     public RefreshTokenDto createRefreshToken(String username);
 
-    public RefreshTokenDto verifyExpiration(RefreshTokenDto token);
+    public RefreshTokenDto verificarExpiracion(RefreshTokenDto token);
 
-    public Optional<RefreshTokenDto> findByToken(String token);
+    public Optional<RefreshTokenDto> encontrarPorToken(String token);
 }

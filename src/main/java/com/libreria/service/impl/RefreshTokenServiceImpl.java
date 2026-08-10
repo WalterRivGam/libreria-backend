@@ -39,7 +39,7 @@ public class RefreshTokenServiceImpl implements RefreshTokenService {
     }
 
     @Override
-    public RefreshTokenDto verifyExpiration(RefreshTokenDto token) {
+    public RefreshTokenDto verificarExpiracion(RefreshTokenDto token) {
         if (token.getFechaExpiracion().compareTo(Instant.now()) < 0) {
             refreshTokenRepository.eliminar(token);
             throw new RuntimeException("El Refresh Token ha expirado. Inicie sesión nuevamente.");
@@ -47,7 +47,7 @@ public class RefreshTokenServiceImpl implements RefreshTokenService {
         return token;
     }
 
-    public Optional<RefreshTokenDto> findByToken(String token) {
+    public Optional<RefreshTokenDto> encontrarPorToken(String token) {
         return refreshTokenRepository.obtenerPorToken(token);
     }
 }

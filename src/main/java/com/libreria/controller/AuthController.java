@@ -50,16 +50,16 @@ public class AuthController {
     @PostMapping("/refresh")
     public ResponseEntity<TokenDto> refresh(@RequestBody RefreshRequestDto request) {
 
-        String tokenRequest = request.getToken();
+        String refreshToken = request.getToken();
 
-        return refreshTokenService.findByToken(tokenRequest)
-                .map(refreshTokenService::verifyExpiration)
+        return refreshTokenService.encontrarPorToken(refreshToken)
+                .map(refreshTokenService::verificarExpiracion)
                 .map(RefreshTokenDto::getUsuario)
                 .map(usuario -> {
                     UserDetails userDetails = userDetailsService.loadUserByUsername(usuario.getUsername());
                     String nuevoJwt = jwtService.generateToken(userDetails);
 
-                    return ResponseEntity.ok(new TokenDto(nuevoJwt, tokenRequest));
+                    return ResponseEntity.ok(new TokenDto(nuevoJwt, refreshToken));
                 })
                 .orElseThrow(() -> new RuntimeException("Refresh token no encontrado"));
     }
