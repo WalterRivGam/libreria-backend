@@ -17,51 +17,47 @@ import jakarta.servlet.http.HttpServletRequest;
 @RestControllerAdvice
 public class UsuarioControllerAdvice {
 
-    @ExceptionHandler(UsuarioNoEncontradoException.class)
-    public ResponseEntity<ErrorDto> usuarioNoEncontradoExceptionHandler(UsuarioNoEncontradoException excepcion,
-            HttpServletRequest request) {
+        @ExceptionHandler(UsuarioNoEncontradoException.class)
+        public ResponseEntity<ErrorDto> usuarioNoEncontradoExceptionHandler(UsuarioNoEncontradoException excepcion,
+                        HttpServletRequest request) {
 
-        String mensaje = "No se encontró usuario con nombre de usuario: " + excepcion.getUsername();
+                ErrorDto error = new ErrorDto(
+                                LocalDateTime.now(),
+                                HttpStatus.NOT_FOUND.value(),
+                                HttpStatus.NOT_FOUND.getReasonPhrase(),
+                                excepcion.getMessage(),
+                                request.getRequestURI());
 
-        ErrorDto error = new ErrorDto(
-                LocalDateTime.now(),
-                HttpStatus.NOT_FOUND.value(),
-                HttpStatus.NOT_FOUND.getReasonPhrase(),
-                mensaje,
-                request.getRequestURI());
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body(error);
+        }
 
-        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(error);
-    }
+        @ExceptionHandler(UsuarioYaRegistradoException.class)
+        public ResponseEntity<ErrorDto> usuarioYaRegistradoExceptionHandler(UsuarioYaRegistradoException exception,
+                        HttpServletRequest request) {
 
-    @ExceptionHandler(UsuarioYaRegistradoException.class)
-    public ResponseEntity<ErrorDto> usuarioYaRegistradoExceptionHandler(UsuarioYaRegistradoException exception,
-            HttpServletRequest request) {
+                ErrorDto error = new ErrorDto(
+                                LocalDateTime.now(),
+                                HttpStatus.CONFLICT.value(),
+                                HttpStatus.CONFLICT.getReasonPhrase(),
+                                exception.getMessage(),
+                                request.getRequestURI());
 
-        String mensaje = "No se puede registrar nombre de usuario ya existente: " + exception.getUsername();
+                return ResponseEntity.status(HttpStatus.CONFLICT).body(error);
+        }
 
-        ErrorDto error = new ErrorDto(
-                LocalDateTime.now(),
-                HttpStatus.CONFLICT.value(),
-                HttpStatus.CONFLICT.getReasonPhrase(),
-                mensaje,
-                request.getRequestURI());
+        @ExceptionHandler(AuthenticationException.class)
+        public ResponseEntity<ErrorDto> errorDeAutenticacion(AuthenticationException exception,
+                        HttpServletRequest request) {
 
-        return ResponseEntity.status(HttpStatus.CONFLICT).body(error);
-    }
+                String mensaje = "No se pudo autenticar al usuario";
 
-    @ExceptionHandler(AuthenticationException.class)
-    public ResponseEntity<ErrorDto> errorDeAutenticacion(AuthenticationException exception,
-            HttpServletRequest request) {
+                ErrorDto error = new ErrorDto(
+                                LocalDateTime.now(),
+                                HttpStatus.UNAUTHORIZED.value(),
+                                HttpStatus.UNAUTHORIZED.getReasonPhrase(),
+                                mensaje,
+                                request.getRequestURI());
 
-        String mensaje = "No se pudo autenticar al usuario";
-
-        ErrorDto error = new ErrorDto(
-                LocalDateTime.now(),
-                HttpStatus.UNAUTHORIZED.value(),
-                HttpStatus.UNAUTHORIZED.getReasonPhrase(),
-                mensaje,
-                request.getRequestURI());
-
-        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(error);
-    }
+                return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(error);
+        }
 }

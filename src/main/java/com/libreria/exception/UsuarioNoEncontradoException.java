@@ -6,5 +6,7 @@ import lombok.Getter;
 @Getter
 @AllArgsConstructor
 public class UsuarioNoEncontradoException extends RuntimeException {
-    private String username;
+    public UsuarioNoEncontradoException(String mensaje) {
+        super(mensaje);
+    }
 }

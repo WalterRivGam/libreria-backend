@@ -6,5 +6,7 @@ import lombok.Getter;
 @Getter
 @AllArgsConstructor
 public class UsuarioYaRegistradoException extends RuntimeException {
-    private String username;
+    public UsuarioYaRegistradoException(String mensaje) {
+        super(mensaje);
+    }
 }

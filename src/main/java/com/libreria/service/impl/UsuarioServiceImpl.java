@@ -24,14 +24,18 @@ public class UsuarioServiceImpl implements UsuarioService {
 
     @Override
     public UsuarioDto obtenerUsuario(String username) {
-        return usuarioRepository.obtenerUsuario(username).orElseThrow(() -> new UsuarioNoEncontradoException(username));
+
+        String mensaje = "No se encontró usuario con nombre de usuario: " + username;
+        return usuarioRepository.obtenerUsuario(username).orElseThrow(() -> new UsuarioNoEncontradoException(mensaje));
     }
 
     @Override
     @Transactional
     public UsuarioDto registrarUsuario(UsuarioDto usuario) {
         if (usuarioRepository.existeConNombreDeUsuario(usuario.getUsername())) {
-            throw new UsuarioYaRegistradoException(usuario.getUsername());
+            String mensaje = "No se puede registrar usuario con nombre de usuario ya existente: "
+                    + usuario.getUsername();
+            throw new UsuarioYaRegistradoException(mensaje);
         }
 
         usuario.setEnabled(true);
