@@ -2,13 +2,13 @@ spring:
   application:
     name: libreria-api
   datasource:
-    url: ${DB_URL}
+    url: ${DB_URL:jdbc:mysql://localhost:3306/libreria}
     username: ${DB_USERNAME}
     password: ${DB_PASSWORD}
 
 logging:
   level:
-    org.springframework.security: DEBUG
+    "[org.springframework.security]": DEBUG
 
 jwt:
   secret:

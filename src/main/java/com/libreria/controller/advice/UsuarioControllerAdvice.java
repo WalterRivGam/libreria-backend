@@ -49,13 +49,11 @@ public class UsuarioControllerAdvice {
         public ResponseEntity<ErrorDto> errorDeAutenticacion(AuthenticationException exception,
                         HttpServletRequest request) {
 
-                String mensaje = "No se pudo autenticar al usuario";
-
                 ErrorDto error = new ErrorDto(
                                 LocalDateTime.now(),
                                 HttpStatus.UNAUTHORIZED.value(),
                                 HttpStatus.UNAUTHORIZED.getReasonPhrase(),
-                                mensaje,
+                                exception.getMessage(),
                                 request.getRequestURI());
 
                 return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(error);

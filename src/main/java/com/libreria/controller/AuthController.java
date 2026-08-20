@@ -36,15 +36,19 @@ public class AuthController {
     @PostMapping("/login")
     public ResponseEntity<TokenDto> login(@RequestBody LoginRequestDto request) {
         authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(request.getUsername(), request.getPassword()));
+                new UsernamePasswordAuthenticationToken(request.getUsername(),
+                        request.getPassword()));
 
-        UserDetails userDetails = userDetailsService.loadUserByUsername(request.getUsername());
+        UserDetails userDetails = userDetailsService
+                .loadUserByUsername(request.getUsername());
 
         String jwt = jwtService.generateToken(userDetails);
 
-        RefreshTokenDto refreshToken = refreshTokenService.createRefreshToken(request.getUsername());
+        RefreshTokenDto refreshToken = refreshTokenService
+                .createRefreshToken(request.getUsername());
 
-        return ResponseEntity.status(HttpStatus.OK).body(new TokenDto(jwt, refreshToken.getToken()));
+        return ResponseEntity.status(HttpStatus.OK)
+                .body(new TokenDto(jwt, refreshToken.getToken()));
     }
 
     @PostMapping("/refresh")
