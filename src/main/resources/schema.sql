@@ -1,8 +1,4 @@
-create database libreria;
-
-use libreria;
-
-create table libro (
+create table if not exists libro (
 	id int not null auto_increment,
     titulo varchar(100) not null,
     autor varchar(100) not null,
@@ -10,7 +6,7 @@ create table libro (
     primary key (id)
 );
 
-create table usuario (
+create table if not exists usuario (
 	id int not null auto_increment,
     username varchar(100) not null unique,
     password varchar(100) not null,
@@ -19,7 +15,7 @@ create table usuario (
     primary key(id)
 );
 
-create table refresh_token (
+create table if not exists refresh_token (
     id BIGINT not null auto_increment,
     token varchar(255) not null unique,
     fecha_expiracion datetime not null,
@@ -27,8 +23,3 @@ create table refresh_token (
     foreign key (usuario_id) references usuario(id),
     primary key (id)
 );
-
-insert into libro (titulo, autor, precio) values
-('Harry Potter y la piedra filosofal', 'Rowling, J. K.', 59.25),
-('Antología del Terror', 'Lovecraft, H.P.', 48.75),
-('El Perro de los Baskerville', 'Conan Doyle, Arthur', 29.93);

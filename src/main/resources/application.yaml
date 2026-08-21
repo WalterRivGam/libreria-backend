@@ -5,6 +5,10 @@ spring:
     url: ${DB_URL:jdbc:mysql://localhost:3306/libreria}
     username: ${DB_USERNAME}
     password: ${DB_PASSWORD}
+  sql:
+    init:
+      mode: always
+      schema-locations: classpath:schema.sql
 
 logging:
   level:
@@ -12,7 +16,7 @@ logging:
 
 jwt:
   secret:
-    key: ${SECRET_KEY}
+    key: ${SECRET_KEY:59VssZGck87wZfG2EF7BfJO/oT7ek5rTuQyR3OP1KhOr4AdgotJCBSKNtmI7/ErZF4HAynu+ZtHkgCgu8LpClQ==}
   expiration: 900000
   refresh:
     duration: 604800000

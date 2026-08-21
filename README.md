@@ -15,11 +15,11 @@ Realizado con Java y Spring. La base de datos en MySQL.
 
 ## Configuración de base de datos
 
-Ejecutar en MySQL el archivo **libreria.sql** ubicado en la raiz del proyecto.
+Crear base de datos en MySQL con el nombre 'libreria'
 
 ## Ejecución
 
-- Crear las variables de entorno y colocar los datos correspondientes a la base de datos:
+- Crear las variables de entorno y reemplazar con los datos reales de la base de datos:
 
 ```
 DB_URL="jdbc:mysql://localhost:<PUERTO_MYSQL>/libreria"
