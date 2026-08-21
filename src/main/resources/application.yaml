@@ -1,14 +1,24 @@
 spring:
   application:
     name: libreria-api
+
   datasource:
     url: ${DB_URL:jdbc:mysql://localhost:3306/libreria}
     username: ${DB_USERNAME}
     password: ${DB_PASSWORD}
+
+  flyway:
+    enabled: true
+    locations: classpath:db/migration
+
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    open-in-view: false
+
   sql:
     init:
-      mode: always
-      schema-locations: classpath:schema.sql
+      mode: never
 
 logging:
   level:
