@@ -31,4 +31,10 @@ public class LibroController {
     public ResponseEntity<LibroDto> registrarLibro(@RequestBody LibroDto libroDto) {
         return ResponseEntity.status(HttpStatus.CREATED).body(libroService.registrarLibro(libroDto));
     }
+
+    @GetMapping("/{idLibro}")
+    public ResponseEntity<LibroDto> listarLibro(Integer idLibro) {
+        return ResponseEntity.status(HttpStatus.OK).body(libroService.listarLibro(idLibro));
+    }
+
 }

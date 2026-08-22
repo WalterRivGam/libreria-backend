@@ -1,6 +1,7 @@
 package com.libreria.repository.impl;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.mapstruct.factory.Mappers;
 import org.springframework.stereotype.Repository;
@@ -30,6 +31,11 @@ public class LibroRepositoryImpl implements LibroRepository {
     public LibroDto registrarLibro(LibroDto libroDto) {
         LibroEntity libroEntity = libroMapper.convertirDtoAEntity(libroDto);
         return libroMapper.convertirEntityADto(libroDao.save(libroEntity));
+    }
+
+    @Override
+    public Optional<LibroDto> listarLibro(Integer idLibro) {
+        return libroDao.findById(idLibro).map(libroMapper::convertirEntityADto);
     }
 
 }
