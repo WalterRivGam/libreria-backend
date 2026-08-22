@@ -66,7 +66,6 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                 SecurityContextHolder.getContext().setAuthentication(authToken);
 
             }
-            filterChain.doFilter(request, response);
         } catch (ExpiredJwtException e) {
             manejarErrorFiltro(response, request, HttpStatus.UNAUTHORIZED,
                     "El token de acceso ha expirado. Refresque su sesión.");
@@ -75,8 +74,10 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         } catch (Exception e) {
             manejarErrorFiltro(response, request, HttpStatus.INTERNAL_SERVER_ERROR,
                     "Error procesando la autenticación.");
+            return;
         }
 
+        filterChain.doFilter(request, response);
     }
 
     private void manejarErrorFiltro(HttpServletResponse response, HttpServletRequest request, HttpStatus status,

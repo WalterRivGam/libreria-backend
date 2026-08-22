@@ -37,4 +37,15 @@ public class LibroServiceImpl implements LibroService {
         return libro.orElseThrow(() -> new LibroNoEncontradoException("Libro con ID " + idLibro + " no encontrado"));
     }
 
+    @Override
+    @Transactional
+    public LibroDto actualizarLibro(LibroDto libroDto, Integer idLibro) {
+        Optional<LibroDto> libroExistente = libroRepository.listarLibro(idLibro);
+        if (libroExistente.isPresent()) {
+            libroDto.setId(idLibro);
+            return libroRepository.actualizarLibro(libroDto);
+        } else {
+            throw new LibroNoEncontradoException("Libro con ID " + idLibro + " no encontrado");
+        }
+    }
 }
