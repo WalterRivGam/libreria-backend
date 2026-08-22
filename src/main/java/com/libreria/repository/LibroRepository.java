@@ -11,4 +11,6 @@ public interface LibroRepository {
     public LibroDto registrarLibro(LibroDto libroDto);
 
     public Optional<LibroDto> listarLibro(Integer idLibro);
+
+    public LibroDto actualizarLibro(LibroDto libroDto);
 }

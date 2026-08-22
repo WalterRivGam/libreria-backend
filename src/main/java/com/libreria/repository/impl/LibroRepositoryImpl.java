@@ -38,4 +38,10 @@ public class LibroRepositoryImpl implements LibroRepository {
         return libroDao.findById(idLibro).map(libroMapper::convertirEntityADto);
     }
 
+    @Override
+    public LibroDto actualizarLibro(LibroDto libroDto) {
+        LibroEntity libroEntity = libroMapper.convertirDtoAEntity(libroDto);
+        return libroMapper.convertirEntityADto(libroDao.save(libroEntity));
+    }
+
 }

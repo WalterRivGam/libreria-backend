@@ -10,4 +10,6 @@ public interface LibroService {
     LibroDto registrarLibro(LibroDto libroDto);
 
     LibroDto listarLibro(Integer idLibro);
+
+    LibroDto actualizarLibro(LibroDto libroDto, Integer idLibro);
 }
