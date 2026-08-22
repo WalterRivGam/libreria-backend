@@ -26,7 +26,11 @@ public class UsuarioServiceImpl implements UsuarioService {
     public UsuarioDto obtenerUsuario(String username) {
 
         String mensaje = "No se encontró usuario con nombre de usuario: " + username;
-        return usuarioRepository.obtenerUsuario(username).orElseThrow(() -> new UsuarioNoEncontradoException(mensaje));
+        return usuarioRepository.obtenerUsuario(username).map(usuario -> {
+            usuario.setPassword("-");
+            return usuario;
+        })
+                .orElseThrow(() -> new UsuarioNoEncontradoException(mensaje));
     }
 
     @Override
