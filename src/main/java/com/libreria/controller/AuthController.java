@@ -29,7 +29,7 @@ public class AuthController {
                         UserDetailsService userDetailsService,
                         JwtService jwtService,
                         RefreshTokenService refreshTokenService) {
-                                
+
                 this.authenticationManager = authenticationManager;
                 this.userDetailsService = userDetailsService;
                 this.jwtService = jwtService;

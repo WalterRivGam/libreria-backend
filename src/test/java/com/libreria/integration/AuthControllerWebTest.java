@@ -36,8 +36,7 @@ public class AuthControllerWebTest {
 
     @Test
     public void loginFallidoPeticionSinCuerpo() throws Exception {
-        mockMvc.perform(post("/api/auth/login")
-                .contentType(MediaType.APPLICATION_JSON))
+        mockMvc.perform(post("/api/auth/login"))
                 .andExpect(status().isForbidden());
     }
 }
