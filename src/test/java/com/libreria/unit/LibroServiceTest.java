@@ -12,7 +12,6 @@ import static org.mockito.BDDMockito.given;
 
 import com.libreria.exception.LibroNoEncontradoException;
 import com.libreria.repository.LibroRepository;
-import com.libreria.service.LibroService;
 import com.libreria.service.impl.LibroServiceImpl;
 
 @ExtendWith(MockitoExtension.class)
