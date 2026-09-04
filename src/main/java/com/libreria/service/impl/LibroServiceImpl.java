@@ -59,7 +59,7 @@ public class LibroServiceImpl implements LibroService {
         if (libro == null || !StringUtils.hasText(libro.getAutor()) || !StringUtils.hasText(libro.getTitulo())) {
             return false;
         }
-        if (libro.getPrecio() != null && libro.getPrecio().compareTo(BigDecimal.ZERO) > 0) {
+        if (libro.getPrecio() != null && libro.getPrecio().compareTo(BigDecimal.ZERO) < 0) {
             return false;
         }
         return true;
