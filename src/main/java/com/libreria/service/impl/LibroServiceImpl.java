@@ -1,12 +1,15 @@
 package com.libreria.service.impl;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.StringUtils;
 
 import com.libreria.dto.LibroDto;
+import com.libreria.exception.DatosInvalidosException;
 import com.libreria.exception.LibroNoEncontradoException;
 import com.libreria.repository.LibroRepository;
 import com.libreria.service.LibroService;
@@ -28,7 +31,10 @@ public class LibroServiceImpl implements LibroService {
     @Override
     @Transactional
     public LibroDto registrarLibro(LibroDto libroDto) {
-        return libroRepository.registrarLibro(libroDto);
+        if (sonDatosValidos(libroDto)) {
+            return libroRepository.registrarLibro(libroDto);
+        }
+        throw new DatosInvalidosException("Los datos del libro no son válidos");
     }
 
     @Override
@@ -47,5 +53,15 @@ public class LibroServiceImpl implements LibroService {
         } else {
             throw new LibroNoEncontradoException("Libro con ID " + idLibro + " no encontrado");
         }
+    }
+
+    private boolean sonDatosValidos(LibroDto libro) {
+        if (libro == null || !StringUtils.hasText(libro.getAutor()) || !StringUtils.hasText(libro.getTitulo())) {
+            return false;
+        }
+        if (libro.getPrecio() != null && libro.getPrecio().compareTo(BigDecimal.ZERO) > 0) {
+            return false;
+        }
+        return true;
     }
 }
