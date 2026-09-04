@@ -13,10 +13,10 @@ import org.springframework.transaction.annotation.Transactional;
 import com.libreria.dto.LibroDto;
 import com.libreria.service.LibroService;
 
+@Transactional
 @SpringBootTest
 @ActiveProfiles("test")
-@Transactional
-public class LibroServiceIRepoTest {
+public class LibroServiceIntegrationTest {
 
     @Autowired
     private LibroService libroService;

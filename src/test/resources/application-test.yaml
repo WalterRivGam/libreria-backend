@@ -9,6 +9,8 @@ spring:
     hibernate:
       ddl-auto: create-drop
     show-sql: true
+  flyway:
+    enabled: false
 jwt:
   secret:
-    key: "una-clave-falsa-super-larga-y-segura-solo-para-que-spring-no-se-queje-en-las-pruebas"
+    key: "c2VjcmV0LWF1dGgta2V5LXRlc3QtcGFyYS1qd3Qtc3lzdGVtLTEyMzQ="

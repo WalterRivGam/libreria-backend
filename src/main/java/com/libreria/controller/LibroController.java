@@ -16,7 +16,7 @@ import com.libreria.dto.LibroDto;
 import com.libreria.service.LibroService;
 
 @RestController
-@RequestMapping("api/libros")
+@RequestMapping("/api/libros")
 public class LibroController {
     private LibroService libroService;
 
