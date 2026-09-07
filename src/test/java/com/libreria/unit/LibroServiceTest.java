@@ -8,6 +8,7 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.given;
@@ -15,6 +16,7 @@ import static org.mockito.BDDMockito.then;
 import static org.mockito.Mockito.never;
 
 import java.math.BigDecimal;
+import java.util.Optional;
 
 import com.libreria.dto.LibroDto;
 import com.libreria.exception.DatosInvalidosException;
@@ -73,5 +75,22 @@ public class LibroServiceTest {
         assertEquals(libro, respuesta);
 
         then(libroRepository).should().registrarLibro(libro);
+    }
+
+    @Test
+    @DisplayName("Actualizar libro pasando ID inválido")
+    public void actualizarLibroIDInexistente() {
+        LibroDto libroDto = new LibroDto(null,
+                "titulo", "autor", BigDecimal.valueOf(100));
+        Integer idLibro = 999;
+
+        given(libroRepository.listarLibro(idLibro)).willReturn(Optional.empty());
+
+        assertThrows(LibroNoEncontradoException.class,
+                () -> libroService.actualizarLibro(libroDto, idLibro));
+
+        assertNull(libroDto.getId());
+
+        then(libroRepository).should(never()).actualizarLibro(any());
     }
 }
